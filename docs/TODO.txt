@@ -1,0 +1,30 @@
+[x] Finalize the Pandoracle 1.0 user surface.
+    - XDG workspace selection and bare-command onboarding;
+    - branded interactive shell with :search, :datasets, and :types;
+    - concise one-shot JSON automation path;
+    - active/retired lifecycle for custom semantic types;
+    - catalog v5 and the sole v4→v5 development migration;
+    - removal of pre-release CLI, JSON, preference, and EXACT compatibility;
+    - user-focused help, guides, package assets, and install workflow.
+
+[x] Implement the Pandora removable-device layer.
+    - UDisks2/polkit provisioning and supervised physical sessions;
+    - public-hierarchy and encrypted-workspace separation;
+    - main, recovery, and independent per-host LUKS2 keyslot roles;
+    - Secret Service automatic unlock and revocable host trust;
+    - XDG insertion detection and dedicated terminal launch.
+
+[ ] Complete release hardware acceptance for Pandora devices.
+    - destructive provisioning and abrupt loop-device removal as root;
+    - packaged helper ownership and the single-polkit-dialog setup transaction;
+    - GNOME and KDE dedicated-terminal close behavior;
+    - representative USB ownership, busy-unmount, and power-off checks.
+
+[ ] Run and publish the reference-machine performance campaign.
+    - 1 GB checkpoint and full 10 GB corpus;
+    - VALUE p95 comparison, skewed TOKEN, ranges, and mixed fan-out;
+    - cold/warm runs, estimate error, peak RSS, and storage overhead;
+    - interruption, recovery, garbage collection, and clean retry.
+
+Small local measurements are not acceptance evidence and this campaign does not
+reopen the frozen search/storage architecture.

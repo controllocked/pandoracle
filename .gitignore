@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.python-version
+
+# Environments
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+
+# Tests and tooling
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.tox/
+
+# Builds
+build/
+dist/
+
+# Local benchmark artifacts (curated reports live in docs/benchmarks/)
+benchmark-results/
+
+# Editors and operating systems
+.idea/
+.vscode/
+*.swp
+*~
+.DS_Store
+Thumbs.db

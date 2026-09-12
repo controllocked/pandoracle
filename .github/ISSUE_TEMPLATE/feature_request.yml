@@ -1,0 +1,36 @@
+name: Feature request
+description: Propose a focused improvement to Pandoracle
+title: "feature: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What workflow is difficult today? Avoid including sensitive data.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Describe the smallest useful change from a user's perspective.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Import and schema
+        - Search and acceleration
+        - Workspace and maintenance
+        - Pandora removable drives
+        - CLI and documentation
+        - Packaging
+    validations:
+      required: true

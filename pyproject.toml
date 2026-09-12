@@ -1,0 +1,72 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pandoracle"
+version = "1.0.0"
+description = "Portable, provenance-first offline dataset search workspace"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { file = "LICENSE" }
+authors = [{ name = "Pandoracle contributors" }]
+keywords = ["csv", "offline", "parquet", "provenance", "search"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "License :: OSI Approved :: Apache Software License",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+]
+dependencies = [
+  "jeepney>=0.9; sys_platform == 'linux'",
+  "pyarrow>=18.0",
+  "questionary>=2.1.1",
+  "rich>=13.9",
+  "SecretStorage>=3.5; sys_platform == 'linux'",
+  "typer>=0.15",
+]
+
+[project.optional-dependencies]
+analytics = ["duckdb>=1.4"]
+dev = [
+  "build>=1.2",
+  "pytest>=8.3",
+  "pytest-cov>=6.0",
+  "ruff>=0.12",
+  "twine>=6.0",
+]
+
+[project.urls]
+Documentation = "https://github.com/controllocked/pandoracle#readme"
+Issues = "https://github.com/controllocked/pandoracle/issues"
+Repository = "https://github.com/controllocked/pandoracle"
+
+[project.scripts]
+pandoracle = "pandoracle.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pandoracle"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.coverage.run]
+branch = true
+source = ["pandoracle"]
+
+[tool.coverage.report]
+fail_under = 70
+show_missing = true
+skip_covered = true

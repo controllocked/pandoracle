@@ -1,0 +1,4 @@
+#!/usr/bin/python3 -I
+from pandoracle.device_privileged import privileged_helper_main
+
+privileged_helper_main()
