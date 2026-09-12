@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pytest
 from rich.console import Console
+from rich.text import Text
 from typer.testing import CliRunner
 
 from pandoracle import cli
@@ -177,5 +178,6 @@ def test_branding_widths_and_non_tty_launcher(
 
     result = CliRunner().invoke(cli.app, [])
     assert result.exit_code == 0
-    assert "Usage: pandoracle" in result.stdout
-    assert "hunt through private data" not in result.stdout
+    plain_output = Text.from_ansi(result.stdout).plain
+    assert "Usage: pandoracle" in plain_output
+    assert "hunt through private data" not in plain_output
