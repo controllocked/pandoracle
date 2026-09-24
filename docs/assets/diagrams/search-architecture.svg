@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1100" viewBox="0 0 1800 1100" role="img" aria-labelledby="title desc">
+  <title id="title">Pandoracle deterministic search architecture</title>
+  <desc id="desc">Four horizontal lanes show the query contract, planner decisions, immutable physical data, and provenance-rich results.</desc>
+  <defs>
+    <style>
+      :root { --paper:#f5f3ee; --ink:#171a1d; --muted:#626a70; --line:#c7ccd0; --white:#fbfaf7; --soft:#e8e7e2; --accent:#4e6f80; --accent-soft:#dfe8eb; }
+      text { font-family:"DejaVu Sans",Arial,sans-serif; fill:var(--ink); }
+      .kicker { font-size:14px; font-weight:700; letter-spacing:2.4px; fill:var(--accent); }
+      .title { font-size:38px; font-weight:700; letter-spacing:-.8px; }
+      .subtitle { font-size:17px; fill:var(--muted); }
+      .lane { font-size:14px; font-weight:700; letter-spacing:1.6px; fill:var(--accent); }
+      .head { font-size:16px; font-weight:700; }
+      .body { font-size:13px; fill:var(--muted); }
+      .tiny { font-size:11.5px; fill:var(--muted); }
+      .mono { font-family:"DejaVu Sans Mono",monospace; font-size:12px; }
+      .node { fill:var(--white); stroke:var(--line); stroke-width:1.5; }
+      .accent-node { fill:var(--accent-soft); stroke:var(--accent); stroke-width:1.5; }
+      .decision { fill:var(--white); stroke:var(--ink); stroke-width:1.5; }
+      .flow { fill:none; stroke:var(--ink); stroke-width:1.8; marker-end:url(#arrow); }
+      .control { fill:none; stroke:var(--accent); stroke-width:1.4; stroke-dasharray:7 6; marker-end:url(#arrow-accent); }
+    </style>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#171a1d"/></marker>
+    <marker id="arrow-accent" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#4e6f80"/></marker>
+  </defs>
+  <rect width="1800" height="1100" fill="#f5f3ee"/>
+  <text x="70" y="60" class="kicker">PANDORACLE / SEARCH ARCHITECTURE</text>
+  <text x="70" y="108" class="title">One semantic query. A deterministic plan per dataset.</text>
+  <text x="70" y="142" class="subtitle">Acceleration narrows access; canonical data decides truth; original records are read only for global survivors.</text>
+
+  <!-- lane backgrounds -->
+  <rect x="70" y="190" width="1660" height="170" rx="5" fill="#fbfaf7" stroke="#c7ccd0"/>
+  <rect x="70" y="378" width="1660" height="314" rx="5" fill="#fbfaf7" stroke="#c7ccd0"/>
+  <rect x="70" y="710" width="1660" height="164" rx="5" fill="#fbfaf7" stroke="#c7ccd0"/>
+  <rect x="70" y="892" width="1660" height="132" rx="5" fill="#fbfaf7" stroke="#c7ccd0"/>
+  <text x="94" y="217" class="lane">QUERY CONTRACT</text>
+  <text x="94" y="405" class="lane">PLANNER / PER DATASET</text>
+  <text x="94" y="737" class="lane">PHYSICAL DATA</text>
+  <text x="94" y="919" class="lane">RESULT</text>
+
+  <!-- query lane -->
+  <rect x="240" y="228" width="260" height="98" rx="4" class="node"/>
+  <text x="260" y="256" class="head">SearchRequest</text>
+  <text x="260" y="280" class="mono">clues[] · dataset?</text>
+  <text x="260" y="303" class="mono">limit · allow_expensive_scan</text>
+
+  <polygon points="635,228 730,277 635,326 540,277" class="decision"/>
+  <text x="635" y="271" text-anchor="middle" class="head">Semantic type</text>
+  <text x="635" y="291" text-anchor="middle" class="body">present?</text>
+
+  <rect x="780" y="228" width="252" height="98" rx="4" class="node"/>
+  <text x="800" y="256" class="head">Bind fields</text>
+  <text x="800" y="280" class="body">Resolve AUTO + operator</text>
+  <text x="800" y="303" class="body">Canonicalize query values</text>
+
+  <rect x="1100" y="228" width="372" height="98" rx="4" class="accent-node"/>
+  <text x="1120" y="256" class="head">Boolean contract</text>
+  <text x="1120" y="282" class="body">OR across fields of the same semantic type</text>
+  <text x="1120" y="305" class="body">AND across independent clues</text>
+
+  <path d="M500 277H528" class="flow"/><path d="M742 277H768" class="flow"/><path d="M1032 277H1088" class="flow"/>
+  <text x="650" y="343" class="tiny">NO → dataset is not applicable</text>
+
+  <!-- planner lane -->
+  <polygon points="270,445 365,494 270,543 175,494" class="decision"/>
+  <text x="270" y="487" text-anchor="middle" class="head">Complete index</text>
+  <text x="270" y="507" text-anchor="middle" class="body">coverage?</text>
+
+  <rect x="420" y="445" width="232" height="98" rx="4" class="node"/>
+  <text x="440" y="473" class="head">Rank seeds</text>
+  <text x="440" y="497" class="body">Observed cardinality</text>
+  <text x="440" y="520" class="body">Stable tie-breaks</text>
+
+  <polygon points="785,445 880,494 785,543 690,494" class="decision"/>
+  <text x="785" y="487" text-anchor="middle" class="head">Row set within</text>
+  <text x="785" y="507" text-anchor="middle" class="body">64 MiB bound?</text>
+
+  <rect x="932" y="445" width="235" height="98" rx="4" class="node"/>
+  <text x="952" y="473" class="head">Intersect candidates</text>
+  <text x="952" y="497" class="body">Sorted unique uint64</text>
+  <text x="952" y="520" class="body">Stop below 250k rows</text>
+
+  <polygon points="1325,435 1440,494 1325,553 1210,494" class="decision"/>
+  <text x="1325" y="480" text-anchor="middle" class="head">Candidate row groups</text>
+  <text x="1325" y="500" text-anchor="middle" class="body">cheaper than projected</text>
+  <text x="1325" y="520" text-anchor="middle" class="body">full scan?</text>
+
+  <polygon points="1578,435 1693,494 1578,553 1463,494" class="decision"/>
+  <text x="1578" y="480" text-anchor="middle" class="head">Within policy</text>
+  <text x="1578" y="500" text-anchor="middle" class="body">or explicitly</text>
+  <text x="1578" y="520" text-anchor="middle" class="body">permitted?</text>
+
+  <path d="M365 494H408" class="flow"/><path d="M652 494H678" class="flow"/><path d="M880 494H920" class="flow"/><path d="M1167 494H1198" class="flow"/><path d="M1440 494H1451" class="flow"/>
+  <text x="377" y="480" class="tiny">YES</text><text x="893" y="480" class="tiny">YES</text><text x="1445" y="480" class="tiny">SCAN</text>
+
+  <rect x="240" y="591" width="325" height="65" rx="4" class="accent-node"/>
+  <text x="260" y="618" class="head">Candidate verification</text>
+  <text x="260" y="641" class="body">Read selected canonical row groups</text>
+  <rect x="675" y="591" width="325" height="65" rx="4" class="node"/>
+  <text x="695" y="618" class="head">Projected full scan</text>
+  <text x="695" y="641" class="body">Relevant canonical columns only</text>
+  <rect x="1110" y="591" width="325" height="65" rx="4" class="node"/>
+  <text x="1130" y="618" class="head">Fail closed</text>
+  <text x="1130" y="641" class="body">Request explicit expensive-scan permission</text>
+
+  <path d="M270 543V575H837V579" class="control"/>
+  <text x="297" y="566" class="tiny">NO / PARTIAL → scan remains complete</text>
+  <path d="M785 543V570H837V579" class="control"/>
+  <text x="793" y="561" class="tiny">OVERFLOW</text>
+  <path d="M1325 553V575H837V579" class="control"/>
+  <text x="1193" y="568" class="tiny">NO</text>
+  <path d="M1325 553V568H402V579" class="control"/>
+  <text x="1276" y="568" class="tiny">YES</text>
+  <path d="M1578 553V575H1272V579" class="control"/>
+  <text x="1510" y="568" class="tiny">NO</text>
+
+  <!-- physical data -->
+  <rect x="220" y="752" width="320" height="84" rx="4" class="node"/>
+  <text x="240" y="780" class="head">VALUE / TOKEN segments</text>
+  <text x="240" y="805" class="mono">SQLite · immutable · disposable</text>
+  <text x="240" y="824" class="tiny">Access path — never semantic authority</text>
+  <rect x="720" y="752" width="360" height="84" rx="4" class="accent-node"/>
+  <text x="740" y="780" class="head">Canonical Parquet</text>
+  <text x="740" y="805" class="mono">aligned row groups · verified values</text>
+  <text x="740" y="824" class="tiny">Source of comparison truth</text>
+  <rect x="1260" y="752" width="300" height="84" rx="4" class="node"/>
+  <text x="1280" y="780" class="head">Original-record Parquet</text>
+  <text x="1280" y="805" class="mono">complete accepted records</text>
+  <text x="1280" y="824" class="tiny">Read only after survivor selection</text>
+
+  <path d="M380 752V690H536V555" class="control"/>
+  <path d="M900 752V670" class="flow"/>
+  <path d="M1410 752V706H1510V680" class="control"/>
+
+  <!-- result lane -->
+  <rect x="250" y="936" width="280" height="58" rx="4" class="node"/>
+  <text x="270" y="961" class="head">Global merge</text>
+  <text x="270" y="982" class="body">Stable dataset + ordinal order</text>
+  <rect x="620" y="936" width="245" height="58" rx="4" class="node"/>
+  <text x="640" y="961" class="head">Apply limit + 1</text>
+  <text x="640" y="982" class="body">Detect truncation</text>
+  <rect x="955" y="936" width="270" height="58" rx="4" class="node"/>
+  <text x="975" y="961" class="head">Materialize survivors</text>
+  <text x="975" y="982" class="body">Fetch complete original records</text>
+  <rect x="1315" y="928" width="350" height="74" rx="4" class="accent-node"/>
+  <text x="1335" y="954" class="head">Result + provenance</text>
+  <text x="1335" y="978" class="mono">RecordRef(version, ordinal)</text>
+  <text x="1335" y="995" class="tiny">source · fields · access path · values</text>
+  <path d="M530 965H608" class="flow"/><path d="M865 965H943" class="flow"/><path d="M1225 965H1303" class="flow"/>
+  <path d="M1410 836V915H1090V924" class="control"/>
+  <path d="M900 836V882H390V924" class="flow"/>
+
+  <line x1="70" y1="1055" x2="1730" y2="1055" stroke="#c7ccd0"/>
+  <text x="70" y="1081" class="tiny">Solid = record/value flow</text>
+  <line x1="238" y1="1077" x2="278" y2="1077" stroke="#4e6f80" stroke-dasharray="7 6"/>
+  <text x="290" y="1081" class="tiny">Dashed = metadata / control</text>
+  <text x="1730" y="1081" text-anchor="end" class="tiny">Acceleration can disappear without changing searchability or RecordRef identity.</text>
+</svg>

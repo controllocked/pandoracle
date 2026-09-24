@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1100" viewBox="0 0 1800 1100" role="img" aria-labelledby="title desc">
+  <title id="title">Pandora trust boundaries</title>
+  <desc id="desc">Trust-boundary diagram for the unprivileged client, privileged fixed helper, system storage services, removable media, and the unchanged path-based Pandoracle core.</desc>
+  <defs>
+    <style>
+      :root { --paper:#f5f3ee; --ink:#171a1d; --muted:#626a70; --line:#c7ccd0; --white:#fbfaf7; --soft:#e8e7e2; --accent:#4e6f80; --accent-soft:#dfe8eb; }
+      text { font-family:"DejaVu Sans",Arial,sans-serif; fill:var(--ink); }
+      .kicker { font-size:14px; font-weight:700; letter-spacing:2.4px; fill:var(--accent); }
+      .title { font-size:38px; font-weight:700; letter-spacing:-.8px; }
+      .subtitle { font-size:17px; fill:var(--muted); }
+      .zone { font-size:13px; font-weight:700; letter-spacing:1.5px; fill:var(--accent); }
+      .head { font-size:17px; font-weight:700; }
+      .body { font-size:13px; fill:var(--muted); }
+      .tiny { font-size:11.5px; fill:var(--muted); }
+      .mono { font-family:"DejaVu Sans Mono",monospace; font-size:12px; }
+      .node { fill:var(--white); stroke:var(--line); stroke-width:1.5; }
+      .accent-node { fill:var(--accent-soft); stroke:var(--accent); stroke-width:1.5; }
+      .flow { fill:none; stroke:var(--ink); stroke-width:1.8; marker-end:url(#arrow); }
+      .control { fill:none; stroke:var(--accent); stroke-width:1.4; stroke-dasharray:7 6; marker-end:url(#arrow-accent); }
+    </style>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#171a1d"/></marker>
+    <marker id="arrow-accent" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#4e6f80"/></marker>
+    <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#c7ccd0" stroke-width="2"/></pattern>
+  </defs>
+  <rect width="1800" height="1100" fill="#f5f3ee"/>
+  <text x="70" y="60" class="kicker">PANDORA / TRUST BOUNDARIES</text>
+  <text x="70" y="108" class="title">A narrow privileged edge around an unchanged data core.</text>
+  <text x="70" y="142" class="subtitle">The client selects intent; one fixed helper owns destructive operations; the core receives only a mounted POSIX path.</text>
+
+  <!-- zones -->
+  <rect x="70" y="190" width="510" height="650" rx="6" fill="#fbfaf7" stroke="#c7ccd0"/>
+  <rect x="610" y="190" width="510" height="650" rx="6" fill="#fbfaf7" stroke="#4e6f80" stroke-width="2"/>
+  <rect x="1150" y="190" width="580" height="650" rx="6" fill="#fbfaf7" stroke="#c7ccd0"/>
+  <rect x="610" y="190" width="510" height="46" rx="6" fill="#4e6f80"/>
+  <text x="94" y="219" class="zone">USER SESSION / UNPRIVILEGED</text>
+  <text x="634" y="219" font-size="13" font-weight="700" letter-spacing="1.5" fill="#fbfaf7">ROOT / SYSTEM BOUNDARY</text>
+  <text x="1174" y="219" class="zone">REMOVABLE MEDIA</text>
+
+  <!-- user zone -->
+  <rect x="110" y="278" width="430" height="108" rx="4" class="node"/>
+  <text x="134" y="308" class="head">Pandora client</text>
+  <text x="134" y="335" class="body">Discovery · confirmation · policy · session supervisor</text>
+  <text x="134" y="362" class="tiny">Never elevated; never passes arbitrary commands</text>
+
+  <rect x="110" y="438" width="430" height="104" rx="4" class="node"/>
+  <text x="134" y="468" class="head">Secret Service</text>
+  <text x="134" y="495" class="body">Optional per-host key in the active login</text>
+  <text x="134" y="521" class="tiny">Compromise of this host exposes only its enrolled key</text>
+
+  <rect x="110" y="622" width="430" height="144" rx="4" class="accent-node"/>
+  <text x="134" y="652" class="head">PANDORACLE CORE</text>
+  <text x="134" y="679" class="mono">workspace path → catalog → data</text>
+  <line x1="134" y1="695" x2="516" y2="695" stroke="#4e6f80"/>
+  <text x="134" y="720" class="body">No block device · no LUKS operations</text>
+  <text x="134" y="744" class="body">No encryption credentials · no root</text>
+
+  <!-- privileged zone -->
+  <rect x="650" y="278" width="430" height="148" rx="4" class="accent-node"/>
+  <text x="674" y="308" class="head">Fixed privileged helper</text>
+  <text x="674" y="335" class="mono">/usr/libexec/pandoracle-device-provision</text>
+  <text x="674" y="364" class="body">provision · enroll one slot · remove one slot</text>
+  <text x="674" y="392" class="tiny">Revalidates path, serial, size, removability and root chain</text>
+
+  <rect x="650" y="478" width="200" height="104" rx="4" class="node"/>
+  <text x="674" y="508" class="head">pkexec</text>
+  <text x="674" y="535" class="body">One transition</text>
+  <text x="674" y="558" class="tiny">Dedicated polkit action</text>
+
+  <rect x="880" y="478" width="200" height="104" rx="4" class="node"/>
+  <text x="904" y="508" class="head">UDisks2</text>
+  <text x="904" y="535" class="body">Mount / unmount</text>
+  <text x="904" y="558" class="tiny">Caller-owned session mount</text>
+
+  <rect x="650" y="634" width="430" height="132" rx="4" class="node"/>
+  <text x="674" y="664" class="head">cryptsetup + filesystem tools</text>
+  <text x="674" y="691" class="body">Fixed layout and bounded parameters only</text>
+  <text x="674" y="717" class="mono">anonymous pipe → helper-local FIFO</text>
+  <text x="674" y="742" class="tiny">0700 directory under root-owned /run · FIFO mode 0600</text>
+
+  <!-- media zone -->
+  <rect x="1190" y="278" width="500" height="112" rx="4" fill="url(#hatch)" stroke="#c7ccd0"/>
+  <text x="1216" y="309" class="head">PANDORA_PUB</text>
+  <text x="1216" y="336" class="mono">64 MiB FAT32 · public / unencrypted</text>
+  <text x="1216" y="363" class="tiny">Owner files + opaque versioned device marker</text>
+
+  <rect x="1190" y="430" width="500" height="296" rx="4" class="accent-node"/>
+  <text x="1216" y="462" class="head">PANDORA_PRIVATE</text>
+  <text x="1216" y="489" class="mono">LUKS2 container</text>
+  <rect x="1222" y="518" width="436" height="174" rx="3" fill="#fbfaf7" stroke="#4e6f80"/>
+  <text x="1246" y="549" class="head">ext4 private root</text>
+  <text x="1246" y="578" class="mono">private descriptor</text>
+  <text x="1246" y="604" class="mono">workspace/</text>
+  <text x="1246" y="634" class="body">RAW · Parquet · catalog.sqlite</text>
+  <text x="1246" y="658" class="body">accelerations · journals · quarantine</text>
+  <text x="1216" y="712" class="tiny">Protected only while powered off and locked</text>
+
+  <!-- flows -->
+  <path d="M540 332H584V530H638" class="control"/>
+  <text x="596" y="452" transform="rotate(-90 596 452)" class="tiny">single elevation</text>
+  <path d="M750 478V450H865V438" class="control"/>
+  <text x="807" y="443" text-anchor="middle" class="tiny">bounded protocol</text>
+  <path d="M540 490H618V716H638" class="flow"/>
+  <text x="582" y="705" text-anchor="middle" class="tiny">secret bytes</text>
+  <path d="M1080 700H1178" class="flow"/>
+  <text x="1128" y="682" text-anchor="middle" class="tiny">unlock / lock</text>
+  <path d="M1080 530H1148V602H1178" class="control"/>
+  <text x="1133" y="552" text-anchor="end" class="tiny">mount</text>
+  <path d="M1222 604H1134V782H560V694H552" class="control"/>
+  <text x="895" y="803" text-anchor="middle" class="tiny">mounted POSIX path — the only interface exposed to the core</text>
+
+  <!-- claims band -->
+  <rect x="70" y="874" width="805" height="146" rx="5" fill="#dfe8eb" stroke="#4e6f80"/>
+  <text x="94" y="906" class="zone">PROTECTED SCENARIO</text>
+  <text x="94" y="940" class="head">Powered-off drive acquired without an enrolled credential</text>
+  <text x="94" y="969" class="body">LUKS2 protects private workspace contents at rest.</text>
+  <text x="94" y="994" class="body">Drive existence, partition layout and approximate volume size remain visible.</text>
+
+  <rect x="895" y="874" width="835" height="146" rx="5" fill="url(#hatch)" stroke="#c7ccd0"/>
+  <text x="919" y="906" class="zone">TRUSTED WHILE OPEN / OUTSIDE CLAIM</text>
+  <text x="919" y="940" class="head">Kernel · root · firmware · installed binaries · active desktop session</text>
+  <text x="919" y="969" class="body">No anonymity, deniability, anti-forensics, secure flash deletion or compromised-host protection.</text>
+  <text x="919" y="994" class="body">The public partition is public; unsafe removal may require recovery.</text>
+  <text x="70" y="1068" class="tiny">Solid = data / secret transport</text>
+  <text x="1730" y="1068" text-anchor="end" class="tiny">Dashed = control or mounted-path handoff</text>
+</svg>
