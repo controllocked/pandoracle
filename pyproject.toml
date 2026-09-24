@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "pandoracle"
 version = "1.0.0"
-description = "Portable, provenance-first offline dataset search workspace"
+description = "Portable encrypted intelligence workspace for hunting across massive private datasets, with an OPSEC-first design."
 readme = "README.md"
 requires-python = ">=3.12"
 license = { file = "LICENSE" }

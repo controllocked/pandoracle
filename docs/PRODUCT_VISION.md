@@ -1,5 +1,8 @@
 # Pandoracle product vision
 
+**Portable encrypted intelligence workspace for hunting across massive private
+datasets, with an OPSEC-first design.**
+
 Pandoracle makes heterogeneous local datasets searchable without surrendering
 source provenance or requiring a hosted service. A user should install one command,
 import a CSV by confirming what each column means, search across datasets in private,

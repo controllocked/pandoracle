@@ -1,6 +1,8 @@
 <p align="center">
-  <img src="docs/assets/pandoracle-banner.svg" width="100%" alt="Pandoracle — private, offline, provenance-first dataset search">
+  <img src="docs/assets/logo.jpg" width="280" alt="Pandoracle logo">
 </p>
+
+<h1 align="center">Pandoracle</h1>
 
 <p align="center">
   <a href="https://github.com/controllocked/pandoracle/actions/workflows/ci.yml"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/controllocked/pandoracle/ci.yml?branch=main&amp;style=flat-square&amp;label=CI"></a>
@@ -10,8 +12,8 @@
 </p>
 
 <p align="center">
-  Import local CSV datasets, search them without sending records anywhere, and
-  keep every result tied to its immutable source.
+  <strong>Portable encrypted intelligence workspace for hunting across massive
+  private datasets, with an OPSEC-first design.</strong>
 </p>
 
 <p align="center">
@@ -252,6 +254,9 @@ of rebuildable Parquet coordinates and SQLite implementation details.
 | Guide | What it covers |
 | --- | --- |
 | [Architecture](docs/ARCHITECTURE.md) | Components, invariants, and data flow |
+| [Search architecture](docs/SEARCH_ARCHITECTURE.md) | Semantic query planning, acceleration, scans, and result materialization |
+| [Pandora OPSEC](docs/PANDORA_OPSEC.md) | Threat model, trust boundaries, key roles, and removable-drive lifecycle |
+| [Integrity and provenance](docs/INTEGRITY_AND_PROVENANCE.md) | Immutable publication, stable identities, recovery, and evidence lineage |
 | [Database](docs/DATABASE.md) | Catalog schema, publication, recovery, and migrations |
 | [CLI UX](docs/CLI_UX.md) | Interactive and non-interactive behavior |
 | [Security](SECURITY.md) | Threat model, privilege boundaries, and device credentials |
